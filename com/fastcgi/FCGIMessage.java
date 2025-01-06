@@ -148,15 +148,9 @@ public class FCGIMessage {
              * since isBeginProcessed is first set below,this
              * can't be out first call, so request.out is properly set
              */
-            try {
-                in.getRequest().getOutputStream().write(endReqMsg, 0,
+            in.getRequest().getOutputStream().write(endReqMsg, 0,
                         FCGIConstants.BUFFER_HEADER_LENGTH
                                 + FCGIConstants.BUFFER_END_REQUEST_BODY_LENGTH);
-            }
-            catch (IOException e) {
-                in.getRequest().getOutputStream().setException(e);
-                return -1;
-            }
         }
         /*
          * Accept this  new request. Read the record body
@@ -197,7 +191,7 @@ public class FCGIMessage {
             Properties tmpProps = new Properties();
             readParams(tmpProps);
 
-            if (in.getFCGIError() != 0 || in.getContentLen() != 0) {
+            if (in.getRequest().errno != 0 || in.getContentLen() != 0) {
                 return FCGIConstants.ERROR_PROTOCOL_ERROR;
             }
             if (tmpProps.containsKey(

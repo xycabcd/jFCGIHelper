@@ -31,7 +31,6 @@ public class FCGIInputStream extends InputStream {
     private int rdNext;
     private int stop;
     private boolean isClosed;
-    private boolean closedByError = false;
 
     /* require methods to set, get and clear */
     private int errno;
@@ -161,7 +160,7 @@ public class FCGIInputStream extends InputStream {
         }
     }
 
-    void fill() throws IOException {
+    public void fill() throws IOException {
         byte[] headerBuf = new byte[FCGIConstants.BUFFER_HEADER_LENGTH];
         int headerLen = 0;
         int status = 0;
@@ -171,13 +170,7 @@ public class FCGIInputStream extends InputStream {
              * If buffer is empty, do a read
              */
             if (rdNext == buffStop) {
-                try {
-                    count = in.read(buff, 0, buffLen);
-                }
-                catch (IOException e) {
-                    setException(e);
-                    return;
-                }
+                count = in.read(buff, 0, buffLen);
                 if (count <= 0) {
                     setFCGIError(FCGIConstants.ERROR_PROTOCOL_ERROR);
                     return;
@@ -294,80 +287,16 @@ public class FCGIInputStream extends InputStream {
         return in.read(data);
     }
 
-
-    /*
-     * An FCGI error has occurred. Save the error code in the stream for
-     * diagnostic purposes and set the stream state so that reads return EOF
-     */
-    public void setFCGIError(int errnum) {
-        /*
-         * Preserve only the first error.
-         */
-        if (errno == 0) {
-            errno = errnum;
-        }
-        isClosed = true;
-        closedByError = true;
-    }
-
-    /*
-     * An Exception has occurred. Save the Exception in the stream for
-     * diagnostic purposes and set the stream state so that reads return EOF
-     */
-    public void setException(Exception errexpt) {
-        /*
-         * Preserve only the first error.
-         */
-        if (errex == null) {
-            errex = errexpt;
-        }
-        isClosed = true;
-        closedByError = true;
-    }
-
-    /*
-     * Clear the stream error code and end-of-file indication.
-     */
-    public void clearFCGIError() {
-        errno = 0;
-        /*
-         * isClosed = false; XXX: should clear isClosed but work is needed to
-         * make it safe to do so.
-         */
-        if(closedByError) isClosed = false;
-    }
-
-    /*
-     * Clear the stream error code and end-of-file indication.
-     */
-    public void clearException() {
-        errex = null;
-        /*
-         * isClosed = false; XXX: should clear isClosed but work is needed to
-         * make it safe to do so.
-         */
-        if(closedByError) isClosed = false;
-    }
-
-    /*
-     * accessor method since var is private
-     */
-    public int getFCGIError() {
-        return errno;
-    }
-
-    /*
-     * accessor method since var is private
-     */
-    public Exception getException() {
-        return errex;
+    void setFCGIError(int errnum) {
+        request.errno = errnum;
+        throw new FCGIException(errnum);
     }
 
 
     /*
      * Re-initializes the stream to read data of the specified type.
      */
-    public void setReaderType(int streamType) {
+    void setReaderType(int streamType) {
 
         type = streamType;
         eorStop = false;
@@ -386,8 +315,7 @@ public class FCGIInputStream extends InputStream {
      * InputStreamInterface.
      */
     @Override
-    public void close() throws IOException {
-        closedByError = false;
+    public void close() {
         isClosed = true;
         stop = rdNext;
     }
@@ -400,11 +328,11 @@ public class FCGIInputStream extends InputStream {
         return stop - rdNext + in.available();
     }
 
-    public void setContentLen(final int contentLen) {
+    void setContentLen(final int contentLen) {
         this.contentLen = contentLen;
     }
 
-    public void setPaddingLen(final int paddingLen) {
+    void setPaddingLen(final int paddingLen) {
         this.paddingLen = paddingLen;
     }
 

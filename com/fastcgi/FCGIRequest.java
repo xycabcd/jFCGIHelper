@@ -82,12 +82,14 @@ public class FCGIRequest {
     FCGIOutputStream errorStream;
     Properties parameters;
     boolean closed = false;
+    int errno = 0;
 
     FCGIRequest() {}
     
     public void close() throws java.io.IOException {
         inputStream.close();
         outputStream.close(); // this set our closed variable
+        errorStream.isClosed = true;
         socket.close();
     }
 
@@ -193,6 +195,9 @@ public class FCGIRequest {
     void setParameters(final Properties parameters) {
          
         this.parameters = parameters;
+    }
+    public int getFCGIError() {
+        return errno;
     }
 }
 

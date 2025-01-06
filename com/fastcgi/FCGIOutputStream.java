@@ -31,8 +31,7 @@ public class FCGIOutputStream extends OutputStream {
 
     private int wrNext;
     private int stop;
-    private boolean isClosed;
-    
+    boolean isClosed;
 
     /* require methods to set, get and clear */
     private int errno;
@@ -148,10 +147,6 @@ public class FCGIOutputStream extends OutputStream {
         }
     }
 
-    public void empty() throws IOException {
-        empty(false);
-    }
-
     /**
      * Encapsulates any buffered stream content in a FastCGI
      * record.  If !doClose, writes the data, making the buffer
@@ -176,17 +171,10 @@ public class FCGIOutputStream extends OutputStream {
         }
         if (doClose) {
             writeCloseRecords();
-            isClosed = true;
         }
         if (wrNext != 0) {
             isAnythingWritten = true;
-            try {
-                out.write(buff, 0, wrNext);
-            }
-            catch (IOException e) {
-                setException(e);
-                return;
-            }
+            out.write(buff, 0, wrNext);
             wrNext = 0;
         }
         /*
@@ -210,7 +198,6 @@ public class FCGIOutputStream extends OutputStream {
         * if isClosed, will return with EOFException from write.
         */
         isClosed = true;
-        request.closed = true;
         stop = wrNext;
         return;
     }
@@ -235,48 +222,9 @@ public class FCGIOutputStream extends OutputStream {
         return;
     }
 
-    /**
-     * An FCGI error has occurred. Save the error code in the stream
-     * for diagnostic purposes and set the stream state so that
-     * reads return EOF
-     */
-    public void setFCGIError(int errnum) {
-        /*
-        * Preserve only the first error.
-        */
-        if (errno == 0) {
-            errno = errnum;
-        }
-        isClosed = true;
-    }
-
-    /**
-     * An Exception has occurred. Save the Exception in the stream
-     * for diagnostic purposes and set the stream state so that
-     * reads return EOF
-     */
-    public void setException(Exception errexpt) {
-        /*
-        * Preserve only the first error.
-        */
-        if (errex == null) {
-            errex = errexpt;
-        }
-        isClosed = true;
-    }
-
-    /**
-     * accessor method since var is private
-     */
-    public int getFCGIError() {
-        return errno;
-    }
-
-    /**
-     * accessor method since var is private
-     */
-    public Exception getException() {
-        return errex;
+    void setFCGIError(int errnum) {
+        request.errno = errnum;
+        throw new FCGIException(errnum);
     }
 
     /**
