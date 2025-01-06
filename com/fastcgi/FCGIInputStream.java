@@ -32,10 +32,6 @@ public class FCGIInputStream extends InputStream {
     private int stop;
     private boolean isClosed;
 
-    /* require methods to set, get and clear */
-    private int errno;
-    private Exception errex;
-
     /* data vars */
 
     private byte[] buff;

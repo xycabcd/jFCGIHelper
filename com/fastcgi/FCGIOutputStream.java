@@ -33,10 +33,6 @@ public class FCGIOutputStream extends OutputStream {
     private int stop;
     boolean isClosed;
 
-    /* require methods to set, get and clear */
-    private int errno;
-    private Exception errex;
-
     /* data vars */
 
     private byte[] buff;
