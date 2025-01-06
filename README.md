@@ -1,15 +1,15 @@
-# jFCGI - A Java FastCGI server side communication library
+# jFCGIHelper - A Java FastCGI server side communication library
 
 This library focus on helping you to communicate with the client(web server). It always stays aside and don't change anything.
 
 > [!IMPORTANT]
-> jFCGI may have bad designes. It. For example, a certain variable you need might not exist.
+> jFCGIHelper may have bad designes. It. For example, a certain variable you need might not exist.
 >
 > If you found one, report it in Issues. Please!
 
 > [!IMPORTANT]
 > 
-> jFCGI is not tested
+> jFCGIHelper is not tested
 
 ## Documents and Guides
 
