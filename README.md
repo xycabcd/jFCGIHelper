@@ -19,7 +19,7 @@ Further documents will come later.
 
 ## Building
 
-No building tool needed. Just build every `.java` files under com/fastcgi by `javac`.
+No building tool needed. Just build every `.java` files under jfcgihelper by `javac`.
 
 ## Credits
 
