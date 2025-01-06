@@ -18,7 +18,7 @@
  
  changed by xycacbd from the original version
 */
-package com.fastcgi;
+package jfcgihelper;
 
 import java.net.Socket;
 import java.util.Properties;

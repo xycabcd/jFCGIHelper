@@ -1,4 +1,4 @@
-package com.fastcgi;
+package jfcgihelper;
 public final class FCGIException extends RuntimeException {
     private int errorNum;
     public FCGIException(int n) {

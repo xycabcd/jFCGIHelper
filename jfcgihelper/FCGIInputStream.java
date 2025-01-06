@@ -17,7 +17,7 @@
  limitations under the License.
 */
 
-package com.fastcgi;
+package jfcgihelper;
 
 import java.io.IOException;
 import java.io.InputStream;

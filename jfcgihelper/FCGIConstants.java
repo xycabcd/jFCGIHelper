@@ -17,7 +17,7 @@
  limitations under the License.
 */
 
-package com.fastcgi;
+package jfcgihelper;
 
 /* This class contains FCGI global definitions corresponding to
  * the #defs in the C version.
