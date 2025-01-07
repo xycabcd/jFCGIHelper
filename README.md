@@ -4,12 +4,9 @@ This library focus on helping you to communicate with the client(web server). It
 
 > [!IMPORTANT]
 > jFCGIHelper may have bad designes. It. For example, a certain variable you need might not exist.
->
-> If you found one, report it in Issues. Please!
 
 > [!IMPORTANT]
-> 
-> jFCGIHelper is not tested
+> jFCGIHelper is not tested. Bugs might present.
 
 ## Documents and Guides
 
