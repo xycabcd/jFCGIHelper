@@ -29,7 +29,7 @@ import java.util.Properties;
  * dont need a stream.
  */
 
-public class FCGIMessage {
+class FCGIMessage {
 
     /*
      * Instance variables
