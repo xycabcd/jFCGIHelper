@@ -24,6 +24,12 @@ import java.net.Socket;
 import java.util.Properties;
 
 public class FCGIRequest {
+    public final static String version = "developing";
+
+    public static void main(String[] args_) {
+        System.out.println(version);
+    }
+
     public static FCGIRequest reciveRequest(Socket givenSocket) throws java.io.IOException {
         FCGIRequest request = new FCGIRequest();
         request.socket = givenSocket;
