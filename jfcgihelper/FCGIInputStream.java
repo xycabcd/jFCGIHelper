@@ -156,7 +156,7 @@ public class FCGIInputStream extends InputStream {
         }
     }
 
-    public void fill() throws IOException {
+    void fill() throws IOException {
         byte[] headerBuf = new byte[FCGIConstants.BUFFER_HEADER_LENGTH];
         int headerLen = 0;
         int status = 0;
