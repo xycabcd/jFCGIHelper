@@ -2,13 +2,13 @@ package jfcgihelper;
 public final class FCGIException extends RuntimeException {
     private int errorNum;
     FCGIException(int n) {
-        if(n == 0) throw new IllegalArgumentException("invalid error number: 0");
         super();
+        if(n == 0) throw new IllegalArgumentException("invalid error number: 0");
         errorNum = n;
     }
     FCGIException(int n, String message) {
-        if(n == 0) throw new IllegalArgumentException("invalid error number: 0");
         super(message);
+        if(n == 0) throw new IllegalArgumentException("invalid error number: 0");
         errorNum = n;
     }
     public int getErrorNumber() {
