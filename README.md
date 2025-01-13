@@ -21,9 +21,9 @@ Need help on:
 - FCGI error logic
 - Close logic
 
-## Building
+## Building and using
 
-No building tool needed. Just build every `.java` files under jfcgihelper by `javac`.
+No building tool needed. Just build every `.java` files `javac`.
 
 ## Credits
 
