@@ -27,4 +27,4 @@ No building tool needed. Just build every `.java` files under jfcgihelper by `ja
 
 ## Credits
 
-Based on [jFastCGI](https://github.com/jFastCGI/jfastcgi)'s FastCGI library. If you want a CGI-like programming experience, use that.
+Based on [jFastCGI's FastCGI library](https://github.com/jFastCGI/jfastcgi/server). If you want a CGI-like programming experience, that one is better.
