@@ -182,7 +182,6 @@ class FCGIMessage {
 
         byte[] response = new byte[64];
         int wrndx = response[FCGIConstants.BUFFER_HEADER_LENGTH];
-        int value = 0;
         int len = 0;
         int plen = 0;
 
@@ -307,10 +306,8 @@ class FCGIMessage {
         int nameLen = 0;
         int valueLen = 0;
         byte[] lenBuff = new byte[3];
-        int i = 1;
 
         while ((nameLen = in.read()) != -1) {
-            i++;
             if ((nameLen & 0x80) != 0) {
                 if ((in.read(lenBuff, 0, 3)) != 3) {
                     in.setFCGIError(FCGIConstants.ERROR_PARAMS_ERROR);

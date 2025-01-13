@@ -37,7 +37,6 @@ public class FCGIOutputStream extends OutputStream {
 
     private byte[] buff;
     private int buffLen;
-    private int buffStop;
     private int type;
     private boolean isAnythingWritten;
     private boolean rawWrite;
@@ -60,7 +59,6 @@ public class FCGIOutputStream extends OutputStream {
         buff = new byte[buffLen];
         type = streamType;
         stop = bufLen;
-        buffStop = bufLen;
         buffLen = bufLen;
         isAnythingWritten = false;
         rawWrite = false;
