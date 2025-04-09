@@ -27,4 +27,4 @@ No building tool needed. Just build every `.java` files `javac`.
 
 ## Credits
 
-Based on [jFastCGI's FastCGI library](https://github.com/jFastCGI/jfastcgi/server). If you want a CGI-like programming experience, that one is better.
+Based on [jFastCGI's FastCGI library](https://github.com/jFastCGI/jfastcgi). If you want a CGI-like programming experience, that one is better.
