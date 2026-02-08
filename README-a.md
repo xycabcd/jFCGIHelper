@@ -14,13 +14,6 @@ This library focus on helping you to communicate with the client(web server). It
 
 Further documents will come later.
 
-## Help needed
-
-Need help on: 
-
-- FCGI error logic
-- Close logic
-
 ## Building and using
 
 No building tool needed. Just build every `.java` files `javac`.
